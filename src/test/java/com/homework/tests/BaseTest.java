@@ -1,6 +1,7 @@
 package com.homework.tests;
 
 import com.homework.pages.*;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import com.homework.pages.checkout.Checkout2Page;
 import com.homework.pages.checkout.CheckoutComplete;
 import com.homework.pages.checkout.CheckoutPage;
@@ -22,6 +23,7 @@ public class BaseTest {
     @BeforeMethod
     @Parameters({"USERNAME","PASSWORD","WEBSITE_URL"})
     public void setUp(String USERNAME, String PASSWORD,String WEBSITE_URL, String CHROMEDRIVER_PATH) {
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(WEBSITE_URL);
