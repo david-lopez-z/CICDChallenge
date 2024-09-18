@@ -1,7 +1,6 @@
 package com.homework.tests;
 
 import com.homework.pages.*;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import com.homework.pages.checkout.Checkout2Page;
 import com.homework.pages.checkout.CheckoutComplete;
 import com.homework.pages.checkout.CheckoutPage;
@@ -11,9 +10,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.Test;
 
 import java.time.Duration;
 
@@ -21,9 +17,9 @@ public class BaseTest {
     protected WebDriver driver;
 
     @BeforeMethod
-    @Parameters({"USERNAME","PASSWORD","WEBSITE_URL"})
+    @Parameters({"USERNAME","PASSWORD","WEBSITE_URL", "CHROMEDRIVER_PATH"})
     public void setUp(String USERNAME, String PASSWORD,String WEBSITE_URL, String CHROMEDRIVER_PATH) {
-        WebDriverManager.chromedriver().setup();
+        System.setProperty("webdriver.chrome.driver", CHROMEDRIVER_PATH);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(WEBSITE_URL);
