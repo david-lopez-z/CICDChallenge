@@ -13,6 +13,7 @@ import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 
 import java.time.Duration;
@@ -24,7 +25,10 @@ public class BaseTest {
     @Parameters({"USERNAME","PASSWORD","WEBSITE_URL", "CHROMEDRIVER_PATH"})
     public void setUp(String USERNAME, String PASSWORD,String WEBSITE_URL, String CHROMEDRIVER_PATH) {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--no-sandbox");
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.get(WEBSITE_URL);
         //Login
