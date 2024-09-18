@@ -10,6 +10,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 
 import java.time.Duration;
 
@@ -19,7 +23,7 @@ public class BaseTest {
     @BeforeMethod
     @Parameters({"USERNAME","PASSWORD","WEBSITE_URL", "CHROMEDRIVER_PATH"})
     public void setUp(String USERNAME, String PASSWORD,String WEBSITE_URL, String CHROMEDRIVER_PATH) {
-        System.setProperty("webdriver.chrome.driver", CHROMEDRIVER_PATH);
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(WEBSITE_URL);
@@ -28,8 +32,6 @@ public class BaseTest {
         loginPage.inputUsername(USERNAME);
         loginPage.inputPassword(PASSWORD);
         loginPage.submitLogin();
-
-
     }
 
     @AfterMethod
